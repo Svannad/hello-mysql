@@ -1,11 +1,5 @@
--- Delete a database
-DROP DATABASE IF EXISTS users_db;
 
--- Create a database
-CREATE DATABASE users_db;
-
--- Select and use database, users_db
-USE users_db;
+USE svannad_dk_db;
 
 -- Create a New Table
 CREATE TABLE users (

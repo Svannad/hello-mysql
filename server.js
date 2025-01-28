@@ -27,6 +27,10 @@ server.get("/", async (req, res) => {
     }
 });
 
+server.get("/users", async (req, res) => {
+    
+})
+
 // Start server on port 3000
 server.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
