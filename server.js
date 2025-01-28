@@ -28,7 +28,43 @@ server.get("/", async (req, res) => {
 });
 
 server.get("/users", async (req, res) => {
-    
+    const query = "SELECT * FROM users"
+    const [users] = await db.execute(query)
+    res.json(users)
+})
+
+server.get("/users/:id", async (req, res) => {
+    const id = req.params.id;
+    const query = "SELECT * FROM users WHERE id = ?"
+    const values = [id]
+    const [users] = await db.execute(query, values)
+    res.json(users[0])
+})
+
+server.post("/users", async (req, res) => {
+    const user = req.body
+    const query = "INSERT INTO users (name, mail, title, image) VALUES (?, ?, ?, ?)"
+    const values =[ user.name, user.mail, user.title, user.image]
+    const [result] = await db.execute(query, values)
+    res.json(result)
+})
+
+server.put("/users/:id", async (req, res) => {
+    const id = req.params.id
+    const user = req.body
+    console.log(user)
+    const query = "UPDATE users SET name=?, mail=?, title=?, image=? WHERE id=?"
+    const values = [user.name, user.mail, user.title, user.image, id]
+    const [result] = await db.execute(query, values)
+    res.json(result)
+})
+
+server.delete("/users/:id", async (req, res) => {
+    const id = req.params.id
+    const query = "DELETE FROM users WHERE id = ?"
+    const values = [id]
+    const [reslut] = await db.execute(query, values)
+    res.json(reslut)
 })
 
 // Start server on port 3000
